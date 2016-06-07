@@ -90,7 +90,6 @@ else:
     offset = 0
 
 x = ((pg_width - (cols * (side + dx)) - dx) / 2) + dx           # used to be a variable named 'startx'...
-c = 0
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if clopts.debug:
     print("rows:  {:2d}\t\tcols:  {:2d}".format(rows, cols), file=sys.stderr)
@@ -101,7 +100,7 @@ if clopts.debug:
 #   This is the "fast and dirty" way to do it.
 #   Also the "sloppy and wasteful" way,
 #   because many, many lines are redrawn over previous lines.
-while (c < cols):
+for c in range(cols):
     y = starty + offset * dy
     r = 0
     while (r < rows) and (y + (dy*2) <= (pg_height - margin)):
@@ -112,7 +111,6 @@ while (c < cols):
         y += 2 * dy
         r += 1
     x += side + dx
-    c += 1
     offset = 1 - offset     # toggle 0/1
 
 page.writePSfile(clopts.outfile)
